@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: inventiq
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn webapp:app --workers 1 --threads 4 --bind 0.0.0.0:$PORT
+    envVars:
+      - key: INVENTIQ_SECRET
+        generateValue: true
+      - key: PYTHON_VERSION
+        value: 3.11.9
